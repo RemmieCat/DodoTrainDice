@@ -1,0 +1,134 @@
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#2c3e50">
+<title>The Train Game</title>
+<link rel="manifest" href="manifest.json">
+<script src="train_script.js"></script>
+<link rel="stylesheet" href="train_style.css">
+</head>
+<body>
+<div id='hero' class='section'>
+  <h1>The Train Dice Game</h1>
+</div>
+<div id='settings' class='section'>
+  <h2>Start a game...</h2>
+  <div class='setup-container'>
+    <div class='player-setup'>
+      <h3>Players (1-8)</h3>
+      <div class='player-inputs'>
+        <input type='text' id='player_1' class='player-input' placeholder='Player 1 Name' value='Player 1'>
+        <input type='text' id='player_2' class='player-input' placeholder='Player 2 Name'>
+        <input type='text' id='player_3' class='player-input' placeholder='Player 3 Name'>
+        <input type='text' id='player_4' class='player-input' placeholder='Player 4 Name'>
+        <input type='text' id='player_5' class='player-input' placeholder='Player 5 Name'>
+        <input type='text' id='player_6' class='player-input' placeholder='Player 6 Name'>
+        <input type='text' id='player_7' class='player-input' placeholder='Player 7 Name'>
+        <input type='text' id='player_8' class='player-input' placeholder='Player 8 Name'>
+      </div>
+    </div>
+    <div class='game-setup'>
+      <h3>Game Settings</h3>
+      <label for='rounds_input'>Number of Rounds per Player:</label>
+      <input type='number' id='rounds_input' min='1' max='50' value='10'>
+      <label class='checkbox-label'><input type='checkbox' id='skip_summary'> Skip turn summary</label>
+      <button id='start_game_button'>Start Game</button>
+    </div>
+  </div>
+</div>
+<div id='dice_area' class='section collapsed'>
+  <div id='current_player_area'>
+    <div id='current_player_name'>Player 1</div>
+    <div id='current_player_status'>Add an engine and tender (roll 1 of 3)</div>
+    <div id='current_player_hint'></div>
+  </div>
+  <div id='dice_container'>
+    <div id='dice_button_area'>
+      <button id='roll_button'>Roll Dice</button>
+      <button id='add_car_button'>Add cars</button>
+      <button id='end_turn_button'>End turn</button>
+    </div>
+
+    <div class='dice_div'>
+      <div id='die_1' class='die d6 in_cup'><div></div></div>
+      <div id='die_2' class='die d5 in_cup'><div></div></div>
+      <div id='die_3' class='die d4 in_cup'><div></div></div>
+      <div id='die_4' class='die d3 in_cup'><div></div></div>
+      <div id='die_5' class='die d2 in_cup'><div></div></div>
+      <div id='die_6' class='die d1 in_cup'><div></div></div>
+    </div>
+  </div>
+</div>
+
+<div id='score_card' class='section collapsed'>
+  <div id='turn_results'></div>
+</div>
+
+<div id='table' class='section collapsed'>
+  <h2>Train value: <span id='current_train_score'>0</span> points</h2>
+
+  <div class='train_board'>
+    <div class='train_container'>
+      <div id='helper' class='car c6 hidden'></div>
+      <div id='engine' class='car c6'></div>
+      <div id='tender' class='car c5'></div>
+      <div id='car_0' class='car c4'></div>
+      <div id='car_1' class='car c3'></div>
+      <div id='car_2' class='car c2'></div>
+      <div id='car_3' class='car c1'></div>
+      <div id='car_4' class='car hidden'></div>
+      <div id='car_5' class='car hidden'></div>
+      <div id='car_6' class='car hidden'></div>
+    </div>
+    <div class='train_container_overflow'>
+      <div id='car_7' class='car hidden'></div>
+      <div id='car_8' class='car hidden'></div>
+      <div id='car_9' class='car hidden'></div>
+      <div id='car_10' class='car hidden'></div>
+      <div id='car_11' class='car hidden'></div>
+      <div id='car_12' class='car hidden'></div>
+      <div id='car_13' class='car hidden'></div>
+      <div id='car_14' class='car hidden'></div>
+      <div id='car_15' class='car hidden'></div>
+      <div id='car_16' class='car hidden'></div>
+      <div id='car_17' class='car hidden'></div>
+      <div id='car_18' class='car hidden'></div>
+      <div id='car_19' class='car hidden'></div>
+      <div id='car_20' class='car hidden'></div>
+      <div id='car_21' class='car hidden'></div>
+    </div>
+    <div class='train_container_overflow'>
+      <div id='car_22' class='car hidden'></div>
+      <div id='car_23' class='car hidden'></div>
+      <div id='car_24' class='car hidden'></div>
+      <div id='car_25' class='car hidden'></div>
+      <div id='car_26' class='car hidden'></div>
+      <div id='car_27' class='car hidden'></div>
+      <div id='car_28' class='car hidden'></div>
+      <div id='car_29' class='car hidden'></div>
+      <div id='car_30' class='car hidden'></div>
+      <div id='car_31' class='car hidden'></div>
+      <div id='car_32' class='car hidden'></div>
+      <div id='car_33' class='car hidden'></div>
+      <div id='car_34' class='car hidden'></div>
+      <div id='car_35' class='car hidden'></div>
+      <div id='car_36' class='car hidden'></div>
+    </div>
+  </div>
+
+</div>
+<div id='end_game_card' class='section collapsed'>
+</div>
+
+<footer id='app-footer'>
+  v1.0 &nbsp;&mdash;&nbsp; <a href='#' id='clear_data_link'>Clear saved data</a>
+</footer>
+
+<script>
+  if ('serviceWorker' in navigator) {
+    navigator.serviceWorker.register('./sw.js');
+  }
+</script>
+</body>
+</html>

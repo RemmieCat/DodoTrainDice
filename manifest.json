@@ -1,0 +1,16 @@
+{
+  "name": "The Train Dice Game",
+  "short_name": "Train Game",
+  "description": "A dice game where you build trains",
+  "start_url": "./main.html",
+  "display": "standalone",
+  "background_color": "#8B4513",
+  "theme_color": "#2c3e50",
+  "icons": [
+    {
+      "src": "D6.jpg",
+      "sizes": "any",
+      "type": "image/jpeg"
+    }
+  ]
+}
