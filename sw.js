@@ -1,6 +1,6 @@
 const CACHE_NAME = 'train-game-v1';
 const ASSETS = [
-  './main.html',
+  './index.html',
   './train_script.js',
   './train_style.css',
   './D1.jpg', './D2.jpg', './D3.jpg', './D4.jpg', './D5.jpg', './D6.jpg',
